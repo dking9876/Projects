@@ -6,15 +6,15 @@
   margin-left: auto; margin-right: auto;
 }
 .width-f {
-  width: 10px !important;
+  width: 500px !important;
 }
 .width-nb {
-    width: 300px !important;
+    width: 100px !important;
 }
 </style>
 
 <table class=nb_table>
 <tr><th class=width-nb>Project</th><th class=width-f>Description</th></tr>
-<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Trivia%20Game'>A Trivia Game</a></td><td class=width-f>Bla Bla Bla</td>
+<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Trivia%20Game'>Trivia Game</a></td><td class=width-f>The Trivia game is a well known question based game. The user gets questions and get points for every correct answer.</td>
 
 </table>
