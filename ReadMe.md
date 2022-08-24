@@ -9,7 +9,7 @@
   width: 500px !important;
 }
 .width-nb {
-    width: 150px !important;
+    width: 200px !important;
 }
 </style>
 
