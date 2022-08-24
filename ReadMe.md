@@ -16,6 +16,5 @@
 <table class=nb_table>
 <tr><th class=width-nb>Project</th><th class=width-f>Description</th></tr>
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Trivia%20Game'>A Trivia Game</a></td><td class=width-f>Bla Bla Bla</td>
-Notebooks.ipynb</a></td><td class=width-f></td>
 
 </table>
