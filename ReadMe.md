@@ -16,7 +16,7 @@
 <table class=nb_table>
 <tr><th class=width-nb>Project</th><th class=width-f>Description</th></tr>
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Trivia%20Game'>Trivia Game</a></td><td class=width-f>The Trivia game is a well known question based game. The user gets questions and get points for every correct answer.</td>
-<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Trivia%20Game'>MachineLearning Grade prediction</a></td><td class=width-f><h4  dir='rtl'>
+<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Grade%20Prediction'>MachineLearning Grade prediction</a></td><td class=width-f><h4  dir='rtl'>
 מטרת הפרויקט היא לחזות את הציון הממוצע של בית ספר מסוים על פי העיר, המקצוע, כמות היחידות, כמות הנבחנים מאותו בית ספר ורמת השגשוג הכלכלי של העיר.
 </td>
 
