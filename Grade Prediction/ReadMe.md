@@ -14,3 +14,7 @@ Python, Numpy, pandas ,matplotlib  ,seaborn,sklearn, sys, time, MachineLearning 
 על מאגר נתונים זה עשיתי טרנספורמציות שונות אשר איפשרו לי להכניס את הנתונים השונים למודל של MachineLearning. הטרנספורמציות כוללות הפיכה  של כל הנתונים שהיו מסוג string לסוג int, העברה של כל המספרים הגדולים למספרים בין 0 – 1 
  בשביל הימנעות מעבודה עם מספרים גדולים ולבסוף חלוקה של הנתונים לקבוצה של train שבעזרתה אני מכין ומלמד את המודל
  שלי ולקבוצה של test שבעזרתה אני בודק את הדיוק של המודל. לבסוף לאחר שניסיתי כמה מודלים שונים של MachineLearning הצלחתי להגיע לדיוק מרבי של 83 אחוזים שזהו דיוק טוב מאוד מתי שמדובר בחישוב של מספר בין 0 ל 100.
+ <h4  dir='rtl'>
+ קישור לפרויקט ב Gogle Colab
+ https://colab.research.google.com/drive/1uVfod24GkXfEWZ_Q3LKcT0Sc7-Hfllf1?usp=sharing#scrollTo=5Y3E1Aes0jAD
+
