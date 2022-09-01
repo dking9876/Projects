@@ -9,6 +9,8 @@
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Secret%20Communication'>Secret communication</a></td><td class=width-f><h4  dir='rtl'>מטרת התוכנית היא לאפשר לשני משתמשים להעביר מסרים מאחד לשני מבלי שאף אדם יוכל לקרוא אותם, גם אם הוא יכול להסניף את התעבורה ביניהם. תוכנית זו בעצם מאפשרת תקשורת סודית מעל הרשת.</td></tr>
 
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Music'>Orchestra</a></td><td class=width-f><h4  dir='rtl'>מטרת הפרויקט זה ליצור מקהלה. בפרויקט ישנו Class מסוג Orchestra (מקהלה ) שבתוכו יש תכונות ואחת התכונות זה אוביקט מסוג Musician (נגן). בנוסף ישנן פעולות שניתן להפעיל בשביל להוסיף להוריד ולקבל מידע על הנגנים.
+<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Music'>Company</a></td><td class=width-f><h4  dir='rtl'>מטרת הפרויקט הוא ליצור חברה ולהגדיר את התפקידים השונים של האנשים העובדים בחברה ועל כל סוג של עובד לבצעה פעולות שונות ולחשב ו את השכר לפי הרמה שלו.
+
 </table>
 <style>
 .nb_table, th, td {
