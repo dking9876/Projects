@@ -10,8 +10,8 @@
 
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Music'>Orchestra</a></td><td class=width-f><h4  dir='rtl'>מטרת הפרויקט זה ליצור מקהלה. בפרויקט ישנו Class מסוג Orchestra (מקהלה ) שבתוכו יש תכונות ואחת התכונות זה אוביקט מסוג Musician (נגן). בנוסף ישנן פעולות שניתן להפעיל בשביל להוסיף להוריד ולקבל מידע על הנגנים.
 <tr><td><a href='https://github.com/dking9876/Projects/tree/master/Company'>Company</a></td><td class=width-f><h4  dir='rtl'>מטרת הפרויקט הוא ליצור חברה ולהגדיר את התפקידים השונים של האנשים העובדים בחברה ועל כל סוג של עובד לבצעה פעולות שונות ולחשב ו את השכר לפי הרמה שלו.
-<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Company'>REST API with Azure Functions</a></td><td class=width-f><h4  dir='rtl'>הפרויקט מממש server  המבצע CRUD operations. 
-<tr><td><a href='https://github.com/dking9876/Projects/tree/master/Company'>MD5 decryption</a></td><td class=width-f><h4  dir='rtl'> מטרת הפרויקט היא לגלות מהו המספר המקורי שהוצפן באמצעות פרוטוקול ההצפנה MD5
+<tr><td><a href='https://github.com/dking9876/Projects/tree/master/REST%20API'>REST API with Azure Functions</a></td><td class=width-f><h4  dir='rtl'>הפרויקט מממש server  המבצע CRUD operations. 
+<tr><td><a href='https://github.com/dking9876/Projects/tree/master/MD5%20decryption'>MD5 decryption</a></td><td class=width-f><h4  dir='rtl'> מטרת הפרויקט היא לגלות מהו המספר המקורי שהוצפן באמצעות פרוטוקול ההצפנה MD5
 
 
 </table>
