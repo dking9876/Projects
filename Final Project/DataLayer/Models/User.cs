@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace DataLayer.Models
 {
-    public class Player
+    public class User
     {
         public string UserName { get; set; }
         public int Password { get; set; }
-        public List<Game> GameList { get; set; }
-
-
     }
 }

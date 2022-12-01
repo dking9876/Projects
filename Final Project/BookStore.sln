@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestFuncApp", "Samples\Rest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmosGettingStarted", "Samples\CosmosGettingStartedTutorial\CosmosGettingStarted.csproj", "{C42D4281-0045-4F23-ABA3-72FE569376E4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{08A66B16-5A60-44D8-924C-FACA00490112}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{C42D4281-0045-4F23-ABA3-72FE569376E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C42D4281-0045-4F23-ABA3-72FE569376E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C42D4281-0045-4F23-ABA3-72FE569376E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A66B16-5A60-44D8-924C-FACA00490112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A66B16-5A60-44D8-924C-FACA00490112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A66B16-5A60-44D8-924C-FACA00490112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A66B16-5A60-44D8-924C-FACA00490112}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

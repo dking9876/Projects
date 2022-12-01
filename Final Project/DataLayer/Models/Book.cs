@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace DataLayer.Models
 {
-    internal class Message
+    public class Book
     {
+        public int Name { get; set; }
     }
 }
