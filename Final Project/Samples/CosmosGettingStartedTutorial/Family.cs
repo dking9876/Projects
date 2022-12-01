@@ -4,8 +4,10 @@ namespace CosmosGettingStartedTutorial
 {
     public class Family
     {
+        public string SchoolName { get; set; }
+
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
+        public string id { get; set; }
         public string LastName { get; set; }
         public Parent[] Parents { get; set; }
         public Child[] Children { get; set; }
