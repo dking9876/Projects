@@ -14,7 +14,7 @@ using Api.Models;
 
 namespace Api.Controllers
 {
-    public static class UserApi
+    public static class UserController
     {
         public static readonly List<User> Items = new List<User>();
 
