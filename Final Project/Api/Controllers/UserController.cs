@@ -25,18 +25,31 @@ namespace Api.Controllers
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
 
-            var user = new User() { UserName = input.UserName };
+            var user = new User() { UserName = input.UserName, Password = input.Password };
+            Items.Add(user);
             return new OkObjectResult(user);
         }
 
-        [FunctionName("GetAllMissions")]
+        [FunctionName("Login")]
+        public static async Task<IActionResult> Login([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/{username}/login")] HttpRequest req, ILogger log, string userName)
+        {
+            log.LogInformation("Creating a new User");
+            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            //var password = JsonConvert.DeserializeObject<string>(requestBody);
+
+            var password = req.Headers["Password"];
+
+            return new OkObjectResult(true);
+        }
+
+        [FunctionName("GetAllUsers")]
         public static IActionResult GetAllMissions([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req, ILogger log)
         {
             log.LogInformation("Getting User list items");
             return new OkObjectResult(Items);
         }
 
-        [FunctionName("GetMissionById")]
+        [FunctionName("GetUserByName")]
         public static IActionResult GetMissionById([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user/{username}")] HttpRequest req, ILogger log, string userName)
         {
             var mission = Items.FirstOrDefault(t => t.UserName == userName);
@@ -61,7 +74,7 @@ namespace Api.Controllers
             return new OkObjectResult(mission);
         }
 
-        [FunctionName("DeleteMission")]
+        [FunctionName("DeleteUser")]
         public static IActionResult DeleteMission([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{username}")] HttpRequest req, ILogger log, string userName)
         {
             var user = Items.FirstOrDefault(t => t.UserName == userName);
