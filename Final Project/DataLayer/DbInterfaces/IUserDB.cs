@@ -9,12 +9,9 @@ namespace DataLayer.DbInterfaces
 {
     internal interface IUserDB
     {
-        void CreateUser(User user);
-        
-        User ReturnUser(string username);
-        User ReturnAllUsers();
-       
+        Task<User> CreateUser(User user);
 
-
+        Task<User> GetUser(string username);
+        Task<List<User>> GetAllUsers();
     }
 }
