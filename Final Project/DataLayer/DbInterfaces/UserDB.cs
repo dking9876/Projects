@@ -44,27 +44,20 @@ namespace DataLayer.DbInterfaces
         }
         public async Task<User> GetUser(string username)
         {
-            /*
-            var sqlQueryText = "SELECT * FROM c WHERE c.UserName = username";
+            
+            var sqlQueryText = "SELECT * FROM c WHERE c.UserName = " + "'" + username + "'";
 
             Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
             QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
             using FeedIterator<User> queryResultSetIterator = db.container.GetItemQueryIterator<User>(queryDefinition);
+            FeedResponse<User> currentResultSet = await queryResultSetIterator.ReadNextAsync();   
 
-            List<User> Users = new List<User>();
-
-            while (queryResultSetIterator.HasMoreResults)
+            if(currentResultSet.Count != 1)
             {
-                FeedResponse<User> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-                foreach (User user in currentResultSet)
-                {
-                    Users.Add(user);
-                    Console.WriteLine("\tRead {0}\n", user);
-                }
+                throw new Exception("User not found");
             }
-            */
-            return null;
+            return currentResultSet.First();
         }
 
         public Task<User> UpdateUser(User user)
@@ -72,31 +65,7 @@ namespace DataLayer.DbInterfaces
             throw new NotImplementedException();
         }
 
-        public async Task<List<User>> GetAllUsers()
-        {
-            /*
-            var sqlQueryText = "SELECT * FROM c";
-
-            Console.WriteLine("Running query: {0}\n", sqlQueryText);
-
-            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
-            using FeedIterator<User> queryResultSetIterator = db.container.GetItemQueryIterator<User>(queryDefinition);
-
-            List<User> Users = new List<User>();
-
-            while (queryResultSetIterator.HasMoreResults)
-            {
-                FeedResponse<User> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-                foreach (User user in currentResultSet)
-                {
-                    Users.Add(user);
-                    Console.WriteLine("\tRead {0}\n", user);
-                }
-            }
-            */
-            return null;
-
-        }
+        
 
     }
 }
