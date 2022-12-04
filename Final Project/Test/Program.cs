@@ -9,7 +9,15 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            TestDbUserAsync().Wait();
+            try
+            {
+                TestDbUserAsync().Wait();
+
+            }
+            catch(Exception ex )
+            {
+                Console.WriteLine(ex);
+            }
         }
         static public void  TestDbConnection()
         {
@@ -18,7 +26,7 @@ namespace Test
         }
         static public async Task TestDbUserAsync()
         {
-            User user = new User() { UserName = "Daniel", Password = "123" };
+            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123"};
             //User user = new User("Mark", "123");
             var db = new DataLayer.DbConnection();
             db.Connect("https://booksstore.documents.azure.com:443/", "9hRgHS70P6B2vo4KrK34Os75nFNDrp3N8eE8w6YRH0MYppNhjnUlGptXbEMKAC5EPe5ENVryQnucACDbWJyClw==");
