@@ -13,7 +13,7 @@ namespace DataLayer.DbInterfaces
 
         Task<User> GetUser(string username);
 
-        Task<User> UpdateUser(User user);
+        Task<User> UpdateUsername(User user, string newUsername);
 
 
     }

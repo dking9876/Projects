@@ -26,6 +26,15 @@ namespace Test
             Console.WriteLine(user1.UserName);
             Console.WriteLine(user1.City);
         }
+
+        static public async Task TestDbUpdateUserAsync()
+        {
+            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
+            UserDB userDb = new UserDB();
+            //await userDb.CreateUser(user);
+            await userDb.UpdateUsername(user, "mark");
+            
+        }
     }
 }
 

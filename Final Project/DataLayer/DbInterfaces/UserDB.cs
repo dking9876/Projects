@@ -2,6 +2,7 @@
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Serialization.HybridRow.Schemas;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -63,9 +64,14 @@ namespace DataLayer.DbInterfaces
             return currentResultSet.First();
         }
 
-        public Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUsername(User user, string newUsername)
         {
-            throw new NotImplementedException();
+            ItemResponse<User> userResponse = await db.container.ReadItemAsync<User>(user.id, new PartitionKey(user.City));
+            userResponse.Resource.UserName = newUsername;
+
+            // replace the item with the updated content
+            userResponse = await db.container.ReplaceItemAsync<User>(userResponse.Resource, user.id, new PartitionKey(user.City));
+            return null;
         }
 
         
