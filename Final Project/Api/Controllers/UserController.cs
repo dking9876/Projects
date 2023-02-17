@@ -11,11 +11,15 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using DataLayer.Models;
 using Api.Models;
+using DataLayer;
+using DataLayer.DbInterfaces;
 
 namespace Api.Controllers
 {
     public static class UserController
     {
+       
+
         public static readonly List<User> Items = new List<User>();
 
         [FunctionName("CreateUser")]
@@ -25,7 +29,11 @@ namespace Api.Controllers
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var input = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
 
-            var user = new User() { UserName = input.UserName, Password = input.Password };
+            var user = new User() { UserName = input.UserName, Password = input.Password, City = input.City };
+
+            UserDB userDb = new UserDB();
+            await userDb.CreateUser(user);
+            
             Items.Add(user);
             return new OkObjectResult(user);
         }

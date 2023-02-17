@@ -15,10 +15,13 @@ namespace DataLayer.DbInterfaces
     public class UserDB : IUserDB
     {
         private DbConnection db;
-        public UserDB(DbConnection db)
+        
+        public UserDB()
         {
-            this.db = db;
+            db = new DataLayer.DbConnection();
+            db.Connect("Users");
         }
+
         public async Task<User> CreateUser(User user)
         {
             try
