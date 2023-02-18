@@ -13,6 +13,7 @@ using DataLayer.Models;
 using Api.Models;
 using DataLayer;
 using DataLayer.DbInterfaces;
+using System;
 
 namespace Api.Controllers
 {
@@ -27,15 +28,14 @@ namespace Api.Controllers
         {
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            
             var input = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
-
-            var user = new User() { UserName = input.UserName, Password = input.Password, City = input.City };
+            var user = new User() { id = input.UserName, UserName = input.UserName, Password = input.Password, City = input.City };
 
             UserDB userDb = new UserDB();
             await userDb.CreateUser(user);
-            
-            Items.Add(user);
             return new OkObjectResult(user);
+            
         }
 
         [FunctionName("Login")]

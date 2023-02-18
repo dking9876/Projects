@@ -13,7 +13,7 @@ namespace Test
         
         static public async Task CreateUserAsync()
         {
-            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
+            User user = new User() { id = "Daniel1", City = "RamatGan", UserName = "Daniel", Password = "123" };
             UserDB userDb = new UserDB();
             await userDb.CreateUser(user);
         }
@@ -29,11 +29,19 @@ namespace Test
 
         static public async Task TestDbUpdateUserAsync()
         {
-            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
+            User user = new User() { id = "Daniel1", City = "RamatGan", UserName = "Daniel", Password = "123" };
             UserDB userDb = new UserDB();
             //await userDb.CreateUser(user);
             await userDb.UpdateUsername(user, "mark");
             
+        }
+        static public async Task TestDBDeleteUserAsync()
+        {
+            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
+            UserDB userDb = new UserDB();
+            //await userDb.CreateUser(user);
+            await userDb.DeleteUser(user);
+
         }
     }
 }
