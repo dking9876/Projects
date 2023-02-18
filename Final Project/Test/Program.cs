@@ -11,7 +11,7 @@ namespace Test
         {
             try
             {
-                UserTests.TestDbUpdateUserAsync().Wait();
+                BookTests.CreateBookAsync().Wait();
 
             }
             catch(Exception ex )

@@ -73,8 +73,17 @@ namespace DataLayer.DbInterfaces
             userResponse = await db.container.ReplaceItemAsync<User>(userResponse.Resource, user.id, new PartitionKey(user.City));
             return null;
         }
+        public async Task<User> DeleteUser(User user)
+        {
+            var partitionKeyValue = user.City;
+            var userId = user.id;
+            ItemResponse<User> userResponse = await db.container.DeleteItemAsync<User>(userId, new PartitionKey(partitionKeyValue));
+            Console.WriteLine("Deleted Family [{0},{1}]\n", partitionKeyValue, userId);
+            return null;
+        }
 
-        
+
+
 
     }
 }

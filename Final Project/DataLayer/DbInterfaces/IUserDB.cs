@@ -14,7 +14,7 @@ namespace DataLayer.DbInterfaces
         Task<User> GetUser(string username);
 
         Task<User> UpdateUsername(User user, string newUsername);
-
+        Task<User> DeleteUser(User user);
 
     }
 }
