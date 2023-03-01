@@ -12,7 +12,7 @@ namespace Test
     {
         static public async Task CreateBookAsync()
         {
-            Book book = new Book() { id = "new3", City = "RamatGan", name = "math b", writer = "yoel geva", subject = "math", classNum = 10 };
+            Book book = new Book() { id = "new1", City = "RamatGan", name = "math b", writer = "yoel geva", subject = "math", classNum = 10 };
             BookDB bookDb = new BookDB();
             await bookDb.CreateBook(book);
         }
@@ -37,7 +37,7 @@ namespace Test
         }
         static public async Task TestDBDeleteBookAsync()
         {
-            Book book = new Book() { id = "math b yoel geva ", City = "RamatGan", name = "math b", writer = "yoel geva", subject = "math", classNum = 10 };
+            Book book = new Book() { id = "new1", City = "RamatGan", name = "math b", writer = "yoel geva", subject = "math", classNum = 10 };
             BookDB bookDb = new BookDB();
             //await bookDb.CreateBook(book);
             await bookDb.DeleteBook(book);
