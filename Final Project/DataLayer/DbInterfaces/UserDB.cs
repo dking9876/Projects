@@ -20,12 +20,11 @@ namespace DataLayer.DbInterfaces
             this.db = db;
         }
         public async Task<User> CreateUser(User user)
-        {
-            Console.WriteLine("1");
+        {  
             try
             {
                 // Read the item to see if it exists
-                ItemResponse<User> UserResponse = await db.container.ReadItemAsync<User>( user.UserName, new PartitionKey("hh"));
+                ItemResponse<User> UserResponse = await db.container.ReadItemAsync<User>( user.UserName, new PartitionKey(""));
                 Console.WriteLine("Item in database with id: {0} already exists\n", UserResponse.Resource.UserName);
             }
             catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
