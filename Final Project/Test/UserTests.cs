@@ -43,6 +43,14 @@ namespace Test
             await userDb.DeleteUser(user);
 
         }
+        static public async Task TestDBCheckUserAsync()
+        {
+            User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
+            UserDB userDb = new UserDB();
+            //await userDb.CreateUser(user);
+            await userDb.CheckUser("mark", "123");
+
+        }
     }
 }
 

@@ -83,6 +83,32 @@ namespace DataLayer.DbInterfaces
             Console.WriteLine("Deleted Family [{0},{1}]\n", partitionKeyValue, userId);
             return null;
         }
+        public async Task<User> CheckUser(string username, string password)
+        {
+            var sqlQueryText = "SELECT * FROM c WHERE c.UserName = " + "'" + username + "'";
+
+            Console.WriteLine("Running query: {0}\n", sqlQueryText);
+
+            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+            using FeedIterator<User> queryResultSetIterator = db.container.GetItemQueryIterator<User>(queryDefinition);
+            FeedResponse<User> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+
+            if (currentResultSet.Count != 1)
+            {
+                throw new Exception("User not found");
+            }
+            User user = currentResultSet.First();
+            ItemResponse<User> userResponse = await db.container.ReadItemAsync<User>(user.id, new PartitionKey(user.City));
+            if (userResponse.Resource.Password == password)
+            {
+                Console.WriteLine("valid username and password");
+            }
+            else
+            {
+                Console.WriteLine("wrong password");
+            }
+            return null;
+        }
 
 
 

@@ -41,7 +41,7 @@ namespace Test
             BookDB bookDb = new BookDB();
             //await bookDb.CreateBook(book);
             await bookDb.DeleteBook(book);
-
+            
         }
     }
 }
