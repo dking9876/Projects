@@ -11,7 +11,7 @@ namespace Test
         {
             try
             {
-               UserTests.TestDBCheckUserAsync().Wait();
+               MessageTests.TestDbGetAllMessageSentByUserAsync().Wait();
 
             }
             catch(Exception ex )
