@@ -26,12 +26,14 @@ namespace DataLayer.DbInterfaces
         public async Task<User> CreateUser(User user)
 
         {  
+           
             try
             {
                 // Read the item to see if it exists
                 ItemResponse<User> UserResponse = await db.container.ReadItemAsync<User>(user.id, new PartitionKey(user.City));
 
                 Console.WriteLine("Item in database with id: {0} already exists\n", UserResponse.Resource.UserName);
+                throw new UserExistsException($"User {user.id} in city {user.City} already exsist");
             }
             catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
             {
@@ -41,12 +43,9 @@ namespace DataLayer.DbInterfaces
                 // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse. We can also access the RequestCharge property to see the amount of RUs consumed on this request.
                 Console.WriteLine("Created item in database with id: {0} Operation consumed {1} RUs.\n", UserResponse.Resource.UserName, UserResponse.RequestCharge);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Exceptin");
-            }
+            
 
-            return null;
+            return user;
         }
         public async Task<User> GetUser(string username)
         {
@@ -110,8 +109,9 @@ namespace DataLayer.DbInterfaces
             return null;
         }
 
-
-
-
+    }
+    public class UserExistsException : Exception
+    {
+        public UserExistsException(string message) : base(message) { }
     }
 }

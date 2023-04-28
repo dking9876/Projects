@@ -14,6 +14,7 @@ using Api.Models;
 using DataLayer;
 using DataLayer.DbInterfaces;
 using System;
+using Microsoft.Azure.Cosmos;
 
 namespace Api.Controllers
 {
@@ -21,7 +22,7 @@ namespace Api.Controllers
     {
        
 
-        public static readonly List<User> Items = new List<User>();
+        public static readonly List<DataLayer.Models.User> Items = new List<DataLayer.Models.User>();
 
         [FunctionName("CreateUser")]
         public static async Task<IActionResult> CreateUser([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user")] HttpRequest req, ILogger log)
@@ -29,13 +30,24 @@ namespace Api.Controllers
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             
-            var input = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
-            var user = new User() { id = input.UserName, UserName = input.UserName, Password = input.Password, City = input.City };
-
-            UserDB userDb = new UserDB();
-            await userDb.CreateUser(user);
-            return new OkObjectResult(user);
+            var APIuser = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
+            var DBuser = new DataLayer.Models.User() { id = APIuser.UserName, UserName = APIuser.UserName, Password = APIuser.Password, City = APIuser.City };
             
+            UserDB userDb = new UserDB();
+            try
+            {
+                var CreatedDBuser = await userDb.CreateUser(DBuser);
+                var UserAPIMOdel = new UserUpdateModel() { UserName = CreatedDBuser.UserName, City = CreatedDBuser.City };
+                return new OkObjectResult(UserAPIMOdel);
+            }
+            catch (UserExistsException ex) 
+            {
+                return new ConflictObjectResult($"User {APIuser.UserName} in city {APIuser.City} already exsist");
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
         }
 
         [FunctionName("Login")]
