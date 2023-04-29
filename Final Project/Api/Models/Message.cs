@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    internal class Message
+    public class Message
     {
+        public string source { get; set; }
+        public string destination { get; set; }
+        public string body { get; set; }
+        public DateTime time { get; set; }
+
     }
 }

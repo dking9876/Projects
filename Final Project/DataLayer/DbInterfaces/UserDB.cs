@@ -76,15 +76,26 @@ namespace DataLayer.DbInterfaces
         }
         public async Task<User> DeleteUser(User user)
         {
-            var partitionKeyValue = user.City;
-            var userId = user.id;
-            ItemResponse<User> userResponse = await db.container.DeleteItemAsync<User>(userId, new PartitionKey(partitionKeyValue));
-            Console.WriteLine("Deleted Family [{0},{1}]\n", partitionKeyValue, userId);
-            return null;
+            try
+            {
+                // Read the item to see if it exists
+                ItemResponse<User> UserResponse = await db.container.ReadItemAsync<User>(user.id, new PartitionKey(user.City));
+                var partitionKeyValue = user.City;
+                var userId = user.id;
+                ItemResponse<User> userResponse = await db.container.DeleteItemAsync<User>(userId, new PartitionKey(partitionKeyValue));
+                Console.WriteLine("Deleted User [{0},{1}]\n", partitionKeyValue, userId);
+                return null;
+                
+            }
+            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new Exception("User not found");
+            }
+            
         }
-        public async Task<User> CheckUser(string username, string password)
+        public async Task<User> CheckUser(string username, string password, string city)
         {
-            var sqlQueryText = "SELECT * FROM c WHERE c.UserName = " + "'" + username + "'";
+            var sqlQueryText = "SELECT * FROM c WHERE c.UserName = '" + username + "' and c.Password = '" + password + "' and c.City = '" + city + "'";
 
             Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
@@ -92,21 +103,18 @@ namespace DataLayer.DbInterfaces
             using FeedIterator<User> queryResultSetIterator = db.container.GetItemQueryIterator<User>(queryDefinition);
             FeedResponse<User> currentResultSet = await queryResultSetIterator.ReadNextAsync();
 
-            if (currentResultSet.Count != 1)
+            if (currentResultSet.Count == 0)
             {
-                throw new Exception("User not found");
-            }
-            User user = currentResultSet.First();
-            ItemResponse<User> userResponse = await db.container.ReadItemAsync<User>(user.id, new PartitionKey(user.City));
-            if (userResponse.Resource.Password == password)
-            {
-                Console.WriteLine("valid username and password");
+                throw new Exception("invalid username or password");
             }
             else
             {
-                Console.WriteLine("wrong password");
+                User user = currentResultSet.First();
+                return user;
             }
-            return null;
+
+            
+        
         }
 
     }

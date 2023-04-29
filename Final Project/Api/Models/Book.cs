@@ -6,7 +6,23 @@ using System.Threading.Tasks;
 
 namespace Api.Models
 {
-    internal class Book
+    public class Book
     {
+        public Book() { }
+        public Book(DataLayer.Models.Book DBbook) 
+        {
+            city = DBbook.City;
+        }
+        
+        public string city { get; set; }
+        public string name { get; set; }
+        public string writer { get; set; }
+        public string subject { get; set; }
+        public int classNum { get; set; }
+
+        public DataLayer.Models.Book GetBookDB()
+        {
+            return new DataLayer.Models.Book() { }
+        }
     }
 }

@@ -54,12 +54,21 @@ namespace Api.Controllers
         public static async Task<IActionResult> Login([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user/{username}/login")] HttpRequest req, ILogger log, string userName)
         {
             log.LogInformation("Creating a new User");
-            //string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            //var password = JsonConvert.DeserializeObject<string>(requestBody);
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var APIuser = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
 
-            var password = req.Headers["Password"];
+            UserDB userDb = new UserDB();
+            try
+            {
+                var Checkuser = await userDb.CheckUser(APIuser.UserName, APIuser.Password, APIuser.City);
+                return new OkObjectResult(true);
 
-            return new OkObjectResult(true);
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(401);
+            }
+            
         }
 
         [FunctionName("GetAllUsers")]
@@ -95,15 +104,26 @@ namespace Api.Controllers
         }
 
         [FunctionName("DeleteUser")]
-        public static IActionResult DeleteMission([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{username}")] HttpRequest req, ILogger log, string userName)
+        public static async Task<IActionResult> DeleteMission([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{username}")] HttpRequest req, ILogger log, string userName)
         {
-            var user = Items.FirstOrDefault(t => t.UserName == userName);
-            if (user == null)
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+           
+            var APIuser = JsonConvert.DeserializeObject<UserCreateModel>(requestBody);
+            var DBuser = new DataLayer.Models.User() { id = APIuser.UserName, UserName = APIuser.UserName, Password = APIuser.Password, City = APIuser.City };
+            UserDB userDb = new UserDB();
+            try
             {
-                return new NotFoundResult();
+                var deleteUserResponse = await userDb.DeleteUser(DBuser);
+                return new OkResult();
             }
-            Items.Remove(user);
-            return new OkResult();
+            catch (Exception ex) 
+            {
+                return new StatusCodeResult(404);
+            }
+            
+
+
+            
         }
     }
 }

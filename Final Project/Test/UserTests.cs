@@ -48,7 +48,7 @@ namespace Test
             User user = new User() { id = "Daniel", City = "RamatGan", UserName = "Daniel", Password = "123" };
             UserDB userDb = new UserDB();
             //await userDb.CreateUser(user);
-            await userDb.CheckUser("mark", "123");
+            await userDb.CheckUser("mark", "123", "RamatGan");
 
         }
     }
