@@ -11,7 +11,7 @@ namespace Test
         {
             try
             {
-               UserBookTests.TestDbGetUserBookByParamsAsync().Wait();
+               BookTests.TestDBGetAllBooks().Wait();
 
             }
             catch(Exception ex )

@@ -81,6 +81,17 @@ namespace DataLayer.DbInterfaces
             return null;
            
         }
+        public async Task<Book[]> GetAllBooks()
+        {
+            var sqlQueryText = "SELECT * FROM c ";
+
+            Console.WriteLine("Running query: {0}\n", sqlQueryText);
+
+            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+            using FeedIterator<Book> queryResultSetIterator = db.container.GetItemQueryIterator<Book>(queryDefinition);
+            FeedResponse<Book> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+            return currentResultSet.ToArray();
+        }
 
 
     }
