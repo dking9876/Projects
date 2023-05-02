@@ -20,7 +20,7 @@ namespace Api.Controllers
     public static class UserBookController
     {
         [FunctionName("SearchBook")]
-        public static async Task<Models.UserBook[]> SearchBook([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "book")] HttpRequest req, ILogger log)
+        public static async Task<IActionResult> SearchBook([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "userbook/searchbook")] HttpRequest req, ILogger log)
         {
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -31,23 +31,26 @@ namespace Api.Controllers
             UserBookDB BookDb = new UserBookDB();
             try
             {
-                var UserBookArrayAPI = new Models.UserBook[] { };
                 var UserBookArrayDB = await BookDb.GetUserBookByParams(DBbook, bookParams.price, bookParams.condition);
+                var UserBookArrayAPI = new Models.UserBook[UserBookArrayDB.Length];
+                
+                if (UserBookArrayDB.Length == 0)
+                {
+                    return new StatusCodeResult(404);
+                    //return null;
+                }
                 for (int i = 0; i < UserBookArrayDB.Length; i++ )
                 {
                     UserBookArrayAPI[i] = new Api.Models.UserBook(UserBookArrayDB[i]);
                 }
+
+                return new OkObjectResult(UserBookArrayAPI);
                 
-                if (UserBookArrayDB == null)
-                {
-                    return new StatusCodeResult(404);
-                }
-                
-                return UserBookArrayAPI;
             }
             catch (Exception ex)
             {
                 return new StatusCodeResult(404);
+                
             }
         }
     }
