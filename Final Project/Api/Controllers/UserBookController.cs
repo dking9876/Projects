@@ -52,6 +52,31 @@ namespace Api.Controllers
                 return new StatusCodeResult(404);
                 
             }
+
         }
+        [FunctionName("CreateUserBook")]
+        public static async Task<IActionResult> CreateUser([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "userbook")] HttpRequest req, ILogger log)
+        {
+            log.LogInformation("Creating a new User");
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+            var APIuserbook = JsonConvert.DeserializeObject<UserBookCreateModel>(requestBody);
+
+            var DBuserbook = APIuserbook.GetUserBookDB();
+
+            UserBookDB userBookDb = new UserBookDB();
+            try
+            {
+                var CreatedDBuserBook = await userBookDb.CreateUserBook(DBuserbook);
+                var UserBookAPIMOdel = new Models.UserBookCreateModel(CreatedDBuserBook);
+                return new OkObjectResult(UserBookAPIMOdel);
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(500);
+            }
+        }
+
+
     }
 }

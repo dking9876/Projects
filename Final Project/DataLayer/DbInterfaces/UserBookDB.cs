@@ -23,15 +23,9 @@ namespace DataLayer.DbInterfaces
         }
         public async Task<UserBook> CreateUserBook(UserBook userbook)
         {
+            
             try
             {
-                // Read the item to see if it exists
-                ItemResponse<UserBook> UserBookResponse = await db.container.ReadItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
-                Console.WriteLine("Item in database with id: {0} already exists\n", UserBookResponse.Resource.id);
-            }
-            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
-            {
-
                 // Create an item in the container representing the Wakefield family. Note we provide the value of the partition key for this item, which is "Wakefield"
                 ItemResponse<UserBook> UserBookResponse = await db.container.CreateItemAsync<UserBook>(userbook, new PartitionKey(userbook.City));
                 // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse. We can also access the RequestCharge property to see the amount of RUs consumed on this request.
@@ -39,10 +33,10 @@ namespace DataLayer.DbInterfaces
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exceptin");
+                throw new Exception("Eror");
             }
 
-            return null;
+            return userbook;
         }
 
         public async Task<UserBook> DeleteUserBook(UserBook userbook)
