@@ -12,6 +12,10 @@ namespace Api.Models
         public Book(DataLayer.Models.Book DBbook) 
         {
             city = DBbook.City;
+            name = DBbook.name;
+            writer = DBbook.writer;
+            subject = DBbook.subject;
+            classNum = DBbook.classNum;
         }
         
         public string city { get; set; }
@@ -22,7 +26,7 @@ namespace Api.Models
 
         public DataLayer.Models.Book GetBookDB()
         {
-            return new DataLayer.Models.Book() { }
+            return new DataLayer.Models.Book() { id = name, City = city, name = name, writer = writer, subject = subject, classNum = classNum };
         }
     }
 }

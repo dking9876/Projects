@@ -54,15 +54,24 @@ namespace DataLayer.DbInterfaces
 
         public async Task<UserBook[]> GetUserBookByParams(Book book, int price, string condition)
         {
-            var sqlQueryText = "SELECT * FROM c WHERE c.book.name = '" + book.name + "' and c.price = " + price + " and c.condition = '" + condition + "'";
-            //var sqlQueryText = "SELECT * FROM c WHERE c.book.name = '" + book.name + "' And c.price = '" + price + "' And c.condition = '" + condition + "'";
-            Console.WriteLine("Running query: {0}\n", sqlQueryText);
+            try
+            {
+                var sqlQueryText = "SELECT * FROM c WHERE c.book.name = '" + book.name + "' and c.price = " + price + " and c.condition = '" + condition + "'";
 
-            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
-            using FeedIterator<UserBook> queryResultSetIterator = db.container.GetItemQueryIterator<UserBook>(queryDefinition);
-            FeedResponse<UserBook> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
-            return currentResultSet.ToArray();
+                QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+                using FeedIterator<UserBook> queryResultSetIterator = db.container.GetItemQueryIterator<UserBook>(queryDefinition);
+                FeedResponse<UserBook> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+
+                return currentResultSet.ToArray();
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("book not found");
+            }
+            
         }
 
         public async Task<UserBook> UpdateUserBook(UserBook userbook, UserBook newUserBook)

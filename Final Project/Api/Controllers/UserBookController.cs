@@ -20,29 +20,34 @@ namespace Api.Controllers
     public static class UserBookController
     {
         [FunctionName("SearchBook")]
-        public static async Task<Models.UserBook>[] SearchBook([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "book")] HttpRequest req, ILogger log)
+        public static async Task<Models.UserBook[]> SearchBook([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "book")] HttpRequest req, ILogger log)
         {
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
             var bookParams = JsonConvert.DeserializeObject<UserBookSearchParams>(requestBody);
-            
+            DataLayer.Models.Book DBbook = bookParams.book.GetBookDB();
 
             UserBookDB BookDb = new UserBookDB();
             try
             {
-
-                var UserBookArray = await UserBookDB.GetUserBookByParams(bookParams.book, bookParams.price, bookParams.condition);
+                var UserBookArrayAPI = new Models.UserBook[] { };
+                var UserBookArrayDB = await BookDb.GetUserBookByParams(DBbook, bookParams.price, bookParams.condition);
+                for (int i = 0; i < UserBookArrayDB.Length; i++ )
+                {
+                    UserBookArrayAPI[i] = new Api.Models.UserBook(UserBookArrayDB[i]);
+                }
                 
-                return UserBookArray;
-            }
-            catch (UserExistsException ex)
-            {
-                return new ConflictObjectResult($"User {APIuser.UserName} in city {APIuser.City} already exsist");
+                if (UserBookArrayDB == null)
+                {
+                    return new StatusCodeResult(404);
+                }
+                
+                return UserBookArrayAPI;
             }
             catch (Exception ex)
             {
-                return new StatusCodeResult(500);
+                return new StatusCodeResult(404);
             }
         }
     }
