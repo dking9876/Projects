@@ -119,11 +119,7 @@ namespace Api.Controllers
             catch (Exception ex) 
             {
                 return new StatusCodeResult(404);
-            }
-            
-
-
-            
+            }  
         }
     }
 }

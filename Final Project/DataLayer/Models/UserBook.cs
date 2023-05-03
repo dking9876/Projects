@@ -8,9 +8,9 @@ namespace DataLayer.Models
 {
     public class UserBook : DbItem
     {
-        public User user { get; set; }
+        public string username { get; set; }
         public int price { get; set; }
-        public Book book { get; set; }
+        public string bookname { get; set; }
         public string condition { get; set; }
     }
 }

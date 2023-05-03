@@ -11,9 +11,9 @@ namespace DataLayer.DbInterfaces
     {
         Task<UserBook> CreateUserBook(UserBook book);
 
-        Task<UserBook[]> GetUserBookByParams(Book book, int price, string condition);
+        Task<UserBook[]> GetUserBookByParams(string book, int price, string condition, string city);
 
-        Task<UserBook> UpdateUserBook(UserBook book, UserBook newUserBook);
+        //Task<UserBook> UpdateUserBook(UserBook book, UserBook newUserBook);
         Task<UserBook> DeleteUserBook(UserBook book);
     }
 }

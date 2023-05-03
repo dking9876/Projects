@@ -26,12 +26,12 @@ namespace Api.Controllers
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
             var bookParams = JsonConvert.DeserializeObject<UserBookSearchParams>(requestBody);
-            DataLayer.Models.Book DBbook = bookParams.book.GetBookDB();
+            
 
             UserBookDB BookDb = new UserBookDB();
             try
             {
-                var UserBookArrayDB = await BookDb.GetUserBookByParams(DBbook, bookParams.price, bookParams.condition);
+                var UserBookArrayDB = await BookDb.GetUserBookByParams(bookParams.bookname, bookParams.price, bookParams.condition, bookParams.city);
                 var UserBookArrayAPI = new Models.UserBook[UserBookArrayDB.Length];
                 
                 if (UserBookArrayDB.Length == 0)
@@ -60,7 +60,7 @@ namespace Api.Controllers
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-            var APIuserbook = JsonConvert.DeserializeObject<UserBookCreateModel>(requestBody);
+            var APIuserbook = JsonConvert.DeserializeObject<Models.UserBook>(requestBody);
 
             var DBuserbook = APIuserbook.GetUserBookDB();
 
@@ -68,12 +68,32 @@ namespace Api.Controllers
             try
             {
                 var CreatedDBuserBook = await userBookDb.CreateUserBook(DBuserbook);
-                var UserBookAPIMOdel = new Models.UserBookCreateModel(CreatedDBuserBook);
+                var UserBookAPIMOdel = new Models.UserBook(CreatedDBuserBook);
                 return new OkObjectResult(UserBookAPIMOdel);
             }
             catch (Exception ex)
             {
                 return new StatusCodeResult(500);
+            }
+        }
+        [FunctionName("DeleteUserBook")]
+        public static async Task<IActionResult> DeleteUserBook([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "userbook/{userbook}")] HttpRequest req, ILogger log)
+        {
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+            var APIuserbook = JsonConvert.DeserializeObject<Models.UserBook>(requestBody);
+
+            var DBuserbook = APIuserbook.GetUserBookDB();
+
+            UserBookDB userBookDb = new UserBookDB();
+            try
+            {
+                var deleteUserResponse = await userBookDb.DeleteUserBook(DBuserbook);
+                return new OkResult();
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(404);
             }
         }
 

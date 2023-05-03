@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,28 +13,34 @@ namespace Api.Models
         public UserBook() { }
         public UserBook(DataLayer.Models.UserBook DBUserbook)
         {
-            UserUpdateModel APIUser = new UserUpdateModel() { UserName = DBUserbook.user.id, City = DBUserbook.user.City };
-            Api.Models.Book APIBook = new Api.Models.Book(DBUserbook.book);
-            user = APIUser;
+            city = DBUserbook.City;
+            username = DBUserbook.username;
             price = DBUserbook.price;
-            book = APIBook;
+            bookname = DBUserbook.bookname;
             condition = DBUserbook.condition;
            
         }
-        public UserUpdateModel user { get; set; }
+        public string city { get; set; }
+        public string username { get; set; }
         public int price { get; set; }
-        public Book book { get; set; }
+        public string bookname { get; set; }
         public string condition { get; set; }
-        
+        public DataLayer.Models.UserBook GetUserBookDB()
+        {
+            
+            return new DataLayer.Models.UserBook() { id = this.username + "_" + this.bookname, City = this.city, username = username, price = price, bookname = bookname, condition = condition };
+
+        }
     }
     public class UserBookSearchParams
     {
-        public Book book { get; set; }
+        public string city { get; set; }
+        public string bookname { get; set; }
         public int price { get; set; }
         public string condition { get; set; }
         
     }
-    public class UserBookCreateModel
+    /*public class UserBookCreateModel
     {
         public UserBookCreateModel() { }
         public UserBookCreateModel(DataLayer.Models.UserBook DBUserbook)
@@ -57,5 +64,5 @@ namespace Api.Models
             return new DataLayer.Models.UserBook() { id = Dbuser.id, City = Dbuser.City, user = Dbuser, price = price, book = Dbbook, condition = condition };
 
         }
-    }
+    }*/
 }

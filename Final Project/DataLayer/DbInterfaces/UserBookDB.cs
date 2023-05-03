@@ -41,16 +41,24 @@ namespace DataLayer.DbInterfaces
 
         public async Task<UserBook> DeleteUserBook(UserBook userbook)
         {
-            ItemResponse<UserBook> bookResponse = await db.container.DeleteItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
-            Console.WriteLine("Deleted UserBook [{0},{1}]\n", userbook.id, userbook.City);
-            return null;
+            try
+            {
+                ItemResponse<UserBook> bookResponse = await db.container.DeleteItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
+                Console.WriteLine("Deleted UserBook [{0},{1}]\n", userbook.id, userbook.City);
+                return null;
+            }
+            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new Exception("UserBook not found");
+            }
+
         }
 
-        public async Task<UserBook[]> GetUserBookByParams(Book book, int price, string condition)
+        public async Task<UserBook[]> GetUserBookByParams(string bookname, int price, string condition, string city)
         {
             try
             {
-                var sqlQueryText = "SELECT * FROM c WHERE c.book.name = '" + book.name + "' and c.price = " + price + " and c.condition = '" + condition + "'";
+                var sqlQueryText = "SELECT * FROM c WHERE c.bookname = '" + bookname + "' and c.price = " + price + " and c.condition = '" + condition + "' and c.City = '" + city + "'";
 
                 Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
@@ -68,7 +76,7 @@ namespace DataLayer.DbInterfaces
             
         }
 
-        public async Task<UserBook> UpdateUserBook(UserBook userbook, UserBook newUserBook)
+        /*public async Task<UserBook> UpdateUserBook(UserBook userbook, UserBook newUserBook)
         {
             ItemResponse<UserBook> userbookResponse = await db.container.ReadItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
             userbookResponse.Resource.price = newUserBook.price;
@@ -79,6 +87,6 @@ namespace DataLayer.DbInterfaces
             // replace the item with the updated content
             userbookResponse = await db.container.ReplaceItemAsync<UserBook>(userbookResponse.Resource, userbook.id, new PartitionKey(userbook.City));
             return null;
-        }
+        }*/
     }
 }

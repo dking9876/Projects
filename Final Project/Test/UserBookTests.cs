@@ -70,7 +70,7 @@ namespace Test
             UserBook UserBook1 = new UserBook() { id = "book1", City = "RamatGan", user = user, price = 40, book = book, condition = "good" };
             UserBook userBook2 = new UserBook() { id = "book1", City = "RamatGan", user = user, price = 45, book = book2, condition = "not good" };
             UserBookDB userBookDb = new UserBookDB();
-            await userBookDb.UpdateUserBook(UserBook1, userBook2);
+            //await userBookDb.UpdateUserBook(UserBook1, userBook2);
 
         }
             
