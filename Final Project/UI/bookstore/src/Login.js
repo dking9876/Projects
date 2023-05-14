@@ -8,6 +8,27 @@ function Login() {
     e.preventDefault();
     // Do something with email and password
   }
+  function sayHello() {
+    //alert('Hello, World!');
+    CheckLogin("", "", "");
+    
+
+  }
+  
+  async function CheckLogin(username, password, city) {
+    const response = await fetch(` http://localhost:7071/api/user/Mark/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(
+            {
+            "UserName":"Mark",
+            "Password":"123",
+            "City":"Ramat-Gan"
+            }
+        )
+    })
+    return await response.json();
+}
 
   return (
     <div>
@@ -21,7 +42,7 @@ function Login() {
           <label>Password:</label>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit">Submit</button>
+        <button onClick={sayHello}>Click me!</button>
       </form>
     </div>
   );
