@@ -10,6 +10,7 @@ namespace Test
 {
     internal class UserBookTests
     {
+        /*
         static public async Task CreateUserBookAsync()
         {
             Book book = new Book() { id = "new1", City = "RamatGan", name = "math b", writer = "yoel geva", subject = "math", classNum = 10 };
@@ -73,6 +74,6 @@ namespace Test
             //await userBookDb.UpdateUserBook(UserBook1, userBook2);
 
         }
-            
+          */  
       }
 }

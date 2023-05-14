@@ -25,14 +25,6 @@ namespace DataLayer.DbInterfaces
         {
             try
             {
-                // Read the item to see if it exists
-                ItemResponse<Message> MessageResponse = await db.container.ReadItemAsync<Message>(message.id, new PartitionKey(message.City));
-
-                Console.WriteLine("Item in database with id: {0} already exists\n", MessageResponse.Resource.id);
-            }
-            catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
-            {
-
                 // Create an item in the container representing the Wakefield family. Note we provide the value of the partition key for this item, which is "Wakefield"
                 ItemResponse<Message> MessageResponse = await this.db.container.CreateItemAsync<Message>(message, new PartitionKey(message.City));
                 // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse. We can also access the RequestCharge property to see the amount of RUs consumed on this request.
@@ -40,10 +32,10 @@ namespace DataLayer.DbInterfaces
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exceptin");
+                throw new Exception("Eror");
             }
 
-            return null;
+            return message;
         }
 
         public async Task<Message> DeleteMessage(Message message)
@@ -53,31 +45,47 @@ namespace DataLayer.DbInterfaces
             return null;
         }
 
-        public async Task<Message[]> GetAllMessageSentByUser(User user)
+        public async Task<Message[]> GetAllMessageSentByUser(string username)
         {
-           
-            var sqlQueryText = "SELECT * FROM c WHERE c.source = " + "'" + user.UserName + "'";
+            try
+            {
+                var sqlQueryText = "SELECT * FROM c WHERE c.source = " + "'" + username + "'";
 
-            Console.WriteLine("Running query: {0}\n", sqlQueryText);
+                Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
-            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
-            using FeedIterator<Message> queryResultSetIterator = db.container.GetItemQueryIterator<Message>(queryDefinition);
-            FeedResponse<Message> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-           
-            return currentResultSet.ToArray();
+                QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+                using FeedIterator<Message> queryResultSetIterator = db.container.GetItemQueryIterator<Message>(queryDefinition);
+                FeedResponse<Message> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+
+                return currentResultSet.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Eror");
+            }
+
+
         }
 
-        public async Task<Message[]> GetAllMessageToUser(User user)
+        public async Task<Message[]> GetAllMessageToUser(string username)
         {
-            var sqlQueryText = "SELECT * FROM c WHERE c.destanation = " + "'" + user.UserName + "'";
+            try
+            {
+                var sqlQueryText = "SELECT * FROM c WHERE c.destination= " + "'" + username + "'";
 
-            Console.WriteLine("Running query: {0}\n", sqlQueryText);
+                Console.WriteLine("Running query: {0}\n", sqlQueryText);
 
-            QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
-            using FeedIterator<Message> queryResultSetIterator = db.container.GetItemQueryIterator<Message>(queryDefinition);
-            FeedResponse<Message> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+                using FeedIterator<Message> queryResultSetIterator = db.container.GetItemQueryIterator<Message>(queryDefinition);
+                FeedResponse<Message> currentResultSet = await queryResultSetIterator.ReadNextAsync();
 
-            return currentResultSet.ToArray();
+                return currentResultSet.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Eror");
+            }
+            
         }
     }
 }

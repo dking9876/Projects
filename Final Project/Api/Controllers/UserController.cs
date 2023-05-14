@@ -70,7 +70,7 @@ namespace Api.Controllers
             }
             
         }
-
+        /*
         [FunctionName("GetAllUsers")]
         public static IActionResult GetAllMissions([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "user")] HttpRequest req, ILogger log)
         {
@@ -102,6 +102,7 @@ namespace Api.Controllers
 
             return new OkObjectResult(mission);
         }
+        */
 
         [FunctionName("DeleteUser")]
         public static async Task<IActionResult> DeleteMission([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "user/{username}")] HttpRequest req, ILogger log, string userName)

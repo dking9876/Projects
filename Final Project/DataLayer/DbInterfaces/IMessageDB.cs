@@ -11,9 +11,9 @@ namespace DataLayer.DbInterfaces
     {
         Task<Message> CreateMessage(Message message);
 
-        Task<Message[]> GetAllMessageToUser(User user);
+        Task<Message[]> GetAllMessageToUser(string username);
 
-        Task<Message[]> GetAllMessageSentByUser(User user);
+        Task<Message[]> GetAllMessageSentByUser(string username);
         Task<Message> DeleteMessage(Message message);
     }
 }

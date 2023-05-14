@@ -55,7 +55,7 @@ namespace Api.Controllers
 
         }
         [FunctionName("CreateUserBook")]
-        public static async Task<IActionResult> CreateUser([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "userbook")] HttpRequest req, ILogger log)
+        public static async Task<IActionResult> CreateUserBook([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "userbook")] HttpRequest req, ILogger log)
         {
             log.LogInformation("Creating a new User");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
