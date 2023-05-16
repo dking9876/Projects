@@ -6,7 +6,7 @@ async function CheckLogin(username, password, city) {
       body: JSON.stringify(
           {
           "UserName":"Mark",
-          "Password":"1236",
+          "Password":"123",
           "City":"Ramat-Gan"
           }
       )

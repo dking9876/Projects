@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import Main from './Main';
+import Messages from './Messages';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,14 +12,11 @@ function App() {
     setUsername(username);
   }
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername('');
-  }
+  // <Login onLogin={handleLogin} />
 
   return (
     <div>
-        <Login onLogin={handleLogin} />
+        <Messages />
     </div>
   );
 }
