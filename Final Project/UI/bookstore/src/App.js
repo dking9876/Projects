@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import Login from './Login';
+import Main from './Main';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = (username) => {
     setIsLoggedIn(true);
+    setUsername(username);
   }
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setUsername('');
   }
 
   return (
-    <div className="App">
-      <header>
-        <h1>Welcome to My Website</h1>
-        {isLoggedIn ? (
-          <button onClick={handleLogout}>Logout</button>
-        ) : (
-          <Login onLogin={handleLogin} />
-        )}
-      </header>
-      <main>
-        {/* Main content of your website */}
-      </main>
-      <footer>
-        {/* Footer content of your website */}
-      </footer>
+    <div>
+        <Login onLogin={handleLogin} />
     </div>
   );
 }
