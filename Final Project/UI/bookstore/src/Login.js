@@ -16,7 +16,7 @@ function Login() {
   }
   
   async function CheckLogin(username, password, city) {
-    const response = await fetch(` http://localhost:7071/api/user/Mark/login`, {
+    const response = await fetch(`http://localhost:3000/api/user/Mark/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
