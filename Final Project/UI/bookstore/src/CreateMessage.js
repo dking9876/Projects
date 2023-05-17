@@ -4,7 +4,7 @@ function CreateMessage({ username }) {
     const [destination, setDestination] = useState('');
     const [body, setBody] = useState('');
 
-    const handleSubmit = (e, param) => {
+    const handleSubmit = (e) => {
       e.preventDefault();
       alert('Message send successfully')
       fetch(`http://localhost:3000/api/message`, {method: 'POST', headers: {'Content-Type': 'application/json'},

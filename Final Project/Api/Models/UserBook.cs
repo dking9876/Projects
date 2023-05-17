@@ -27,8 +27,8 @@ namespace Api.Models
         public string condition { get; set; }
         public DataLayer.Models.UserBook GetUserBookDB()
         {
-            
-            return new DataLayer.Models.UserBook() { id = this.username + "_" + this.bookname, City = this.city, username = username, price = price, bookname = bookname, condition = condition };
+            Guid obj = Guid.NewGuid();
+            return new DataLayer.Models.UserBook() { id = $"{obj}", City = this.city, username = username, price = price, bookname = bookname, condition = condition };
 
         }
     }
