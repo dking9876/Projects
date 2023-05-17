@@ -4,16 +4,14 @@ import React, { useState } from 'react';
 function Messages() {
     const [data, setdata] = useState([])
 
-      const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/message/mark/getmessages`, {
-        method: 'GET'})
+        fetch(`http://localhost:3000/api/message/mark/getmessages`, {method: 'GET'})
         .then(response => response.json())
-      .then(json => setdata(json))
-      .finally(() => {
-        
-      })
-      }
+        .then(json => setdata(json))
+        .finally(() => {
+        })
+    }
 
     return (
     <div>
@@ -22,7 +20,7 @@ function Messages() {
       <button type="submit">Click to see messages</button>
       </form>
         <div>
-        <table>
+        <table border={1}>
           <thead>
             <tr>
               <th>city</th>

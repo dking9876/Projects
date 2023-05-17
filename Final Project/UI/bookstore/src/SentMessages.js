@@ -22,7 +22,7 @@ function SentMessages() {
       <button type="submit">Click to see messages</button>
       </form>
         <div>
-        <table>
+        <table border={1}>
           <thead>
             <tr>
               <th>city</th>
