@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-function Messages() {
+function SentMessages() {
     const [data, setdata] = useState([])
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/message/mark/getmessages`, {
+        fetch(` http://localhost:3000/api/message/daniel1/sentmessages`, {
         method: 'GET'})
         .then(response => response.json())
       .then(json => setdata(json))
@@ -17,7 +17,7 @@ function Messages() {
 
     return (
     <div>
-      <h1>Messages</h1>
+      <h1>SentMessages</h1>
       <form onSubmit={handleSubmit}>
       <button type="submit">Click to see messages</button>
       </form>
@@ -26,7 +26,7 @@ function Messages() {
           <thead>
             <tr>
               <th>city</th>
-              <th>source</th>
+              <th>destanation</th>
               <th>body</th>
             </tr>
           </thead>
@@ -34,7 +34,7 @@ function Messages() {
             {data.map(item => (
               <tr key={item.body}>
                 <td>{item.city}</td>
-                <td>{item.source}</td>
+                <td>{item.destination}</td>
                 <td>{item.body}</td>
               </tr>
             ))}
@@ -46,4 +46,4 @@ function Messages() {
             }
     
 
-  export default Messages;
+  export default SentMessages;
