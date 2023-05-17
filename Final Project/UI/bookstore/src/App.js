@@ -6,6 +6,7 @@ import SentMessages from './SentMessages'
 import SearchBook from './SearchBook'
 import CreateMessage from './CreateMessage'
 import CreateUserBook from './CreateUserBook'
+import Signup from './Signup';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ function App() {
 
   return (
     <div>
-        <CreateUserBook username = "daniel" />
+        <Signup />
     </div>
   );
 }
