@@ -15,5 +15,6 @@ namespace DataLayer.DbInterfaces
 
         //Task<UserBook> UpdateUserBook(UserBook book, UserBook newUserBook);
         Task<UserBook> DeleteUserBook(UserBook book);
+        Task<UserBook[]> GetAllUserBooksCreatedByUser(string username);
     }
 }

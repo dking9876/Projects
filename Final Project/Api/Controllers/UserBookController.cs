@@ -96,6 +96,36 @@ namespace Api.Controllers
                 return new StatusCodeResult(404);
             }
         }
+        [FunctionName("GetMyBooks")]
+        public static async Task<IActionResult> GetMyBooks([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "userbook/{username}")] HttpRequest req, ILogger log, string userName )
+        {
+
+            UserBookDB BookDb = new UserBookDB();
+            try
+            {
+                var UserBookArrayDB = await BookDb.GetAllUserBooksCreatedByUser(userName);
+                var UserBookArrayAPI = new Models.UserBook[UserBookArrayDB.Length];
+
+                if (UserBookArrayDB.Length == 0)
+                {
+                    return new StatusCodeResult(404);
+                    //return null;
+                }
+                for (int i = 0; i < UserBookArrayDB.Length; i++)
+                {
+                    UserBookArrayAPI[i] = new Api.Models.UserBook(UserBookArrayDB[i]);
+                }
+
+                return new OkObjectResult(UserBookArrayAPI);
+
+            }
+            catch (Exception ex)
+            {
+                return new StatusCodeResult(404);
+
+            }
+
+        }
 
 
     }

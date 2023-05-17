@@ -75,18 +75,37 @@ namespace DataLayer.DbInterfaces
             }
             
         }
-
-        /*public async Task<UserBook> UpdateUserBook(UserBook userbook, UserBook newUserBook)
+        public async Task<UserBook[]> GetAllUserBooksCreatedByUser(string username)
         {
-            ItemResponse<UserBook> userbookResponse = await db.container.ReadItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
-            userbookResponse.Resource.price = newUserBook.price;
-            userbookResponse.Resource.book = newUserBook.book;
-            userbookResponse.Resource.book = newUserBook.book;
-            userbookResponse.Resource.condition = newUserBook.condition;
+            try
+            {
+                var sqlQueryText = "SELECT * FROM c WHERE c.username = " + "'" + username + "'";
 
-            // replace the item with the updated content
-            userbookResponse = await db.container.ReplaceItemAsync<UserBook>(userbookResponse.Resource, userbook.id, new PartitionKey(userbook.City));
-            return null;
-        }*/
-    }
+                Console.WriteLine("Running query: {0}\n", sqlQueryText);
+
+                QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+                using FeedIterator<UserBook> queryResultSetIterator = db.container.GetItemQueryIterator<UserBook>(queryDefinition);
+                FeedResponse<UserBook> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+
+                return currentResultSet.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Eror");
+            }
+        }
+
+            /*public async Task<UserBook> UpdateUserBook(UserBook userbook, UserBook newUserBook)
+            {
+                ItemResponse<UserBook> userbookResponse = await db.container.ReadItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
+                userbookResponse.Resource.price = newUserBook.price;
+                userbookResponse.Resource.book = newUserBook.book;
+                userbookResponse.Resource.book = newUserBook.book;
+                userbookResponse.Resource.condition = newUserBook.condition;
+
+                // replace the item with the updated content
+                userbookResponse = await db.container.ReplaceItemAsync<UserBook>(userbookResponse.Resource, userbook.id, new PartitionKey(userbook.City));
+                return null;
+            }*/
+        }
 }
