@@ -41,9 +41,16 @@ namespace DataLayer.DbInterfaces
 
         public async Task<UserBook> DeleteUserBook(UserBook userbook)
         {
+              
+            
             try
             {
-                ItemResponse<UserBook> bookResponse = await db.container.DeleteItemAsync<UserBook>(userbook.id, new PartitionKey(userbook.City));
+                var sqlQueryText = "SELECT * FROM c WHERE c.bookname = '" + userbook.bookname + "' and c.price = " + userbook.price + " and c.condition = '" + userbook.condition + "' and c.City = '" + userbook.City + "'";
+                QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+                using FeedIterator<UserBook> queryResultSetIterator = db.container.GetItemQueryIterator<UserBook>(queryDefinition);
+                FeedResponse<UserBook> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+                string id = currentResultSet.First().id;
+                ItemResponse<UserBook> bookResponse = await db.container.DeleteItemAsync<UserBook>(id, new PartitionKey(userbook.City));
                 Console.WriteLine("Deleted UserBook [{0},{1}]\n", userbook.id, userbook.City);
                 return null;
             }
@@ -51,6 +58,11 @@ namespace DataLayer.DbInterfaces
             {
                 throw new Exception("UserBook not found");
             }
+            catch (Exception ex)
+            {
+                throw new Exception("book not found");
+            }
+
 
         }
 

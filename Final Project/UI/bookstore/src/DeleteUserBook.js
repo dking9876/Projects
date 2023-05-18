@@ -8,7 +8,7 @@ function DeleteUserBook({ username }) {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      alert('Your book for sale created successfully')
+      alert('Your book were deleted')
       fetch(`http://localhost:3000/api/userbook/` + username.username + ``, {method: 'DELETE', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
