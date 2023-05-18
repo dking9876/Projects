@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div>
-        <Signup />
+        <Messages username = 'mark'/>
     </div>
   );
 }

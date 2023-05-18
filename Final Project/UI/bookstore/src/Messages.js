@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-function Messages() {
+function Messages(username) {
     const [data, setdata] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/message/mark/getmessages`, {method: 'GET'})
+        fetch(`http://localhost:3000/api/message/` + username.username + `/getmessages`, {method: 'GET'})
         .then(response => response.json())
         .then(json => setdata(json))
         .finally(() => {
