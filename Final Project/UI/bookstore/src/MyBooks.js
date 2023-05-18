@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-function Messages(username) {
+function MyBooks(username) {
     const [data, setdata] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/message/` + username.username + `/getmessages`, {method: 'GET'})
+        fetch(`http://localhost:3000/api/userbook/` + username.username + ``, {method: 'GET'})
         .then(response => response.json())
         .then(json => setdata(json))
         .catch(error => {
@@ -19,25 +19,27 @@ function Messages(username) {
 
     return (
     <div>
-      <h1>Messages</h1>
+      <h1>MyBooks</h1>
       <form onSubmit={handleSubmit}>
-      <button type="submit">Click to see messages</button>
+      <button type="submit">Click to see your books</button>
       </form>
         <div>
         <table border={1}>
           <thead>
             <tr>
               <th>city</th>
-              <th>source</th>
-              <th>body</th>
+              <th>price</th>
+              <th>bookname</th>
+              <th>condition</th>
             </tr>
           </thead>
           <tbody>
             {data.map(item => (
               <tr key={item.body}>
                 <td>{item.city}</td>
-                <td>{item.source}</td>
-                <td>{item.body}</td>
+                <td>{item.price}</td>
+                <td>{item.bookname}</td>
+                <td>{item.condition}</td>
               </tr>
             ))}
           </tbody>
@@ -48,4 +50,4 @@ function Messages(username) {
             }
     
 
-  export default Messages;
+  export default MyBooks;
