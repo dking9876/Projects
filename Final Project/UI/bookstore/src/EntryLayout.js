@@ -9,7 +9,7 @@ const EntryLayout = () => {
             <Link to="login">Login</Link>
           </li>
           <li>
-            <Link to="/signup">Signup</Link>
+            <Link to="/signup">SignIn</Link>
           </li>
         </ul>
       </nav>

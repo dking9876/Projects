@@ -25,16 +25,54 @@ function App() {
     setUsername(username);
   }
 
-  const pageStyle = {
-    backgroundColor: 'lightblue',
-    padding: '20px',
-    fontSize: '18px',
-    color: 'black',
-  }
+  const styles = {
+    container: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      backgroundColor: '#E0E8F0',
+    },
+    content: {
+      textAlign: 'center',
+      backgroundColor: '#FFFFFF',
+      padding: '60px',
+      borderRadius: '8px',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    },
+    title: {
+      fontSize: '50px',
+      marginBottom: '20px',
+      color: '#34495E',
+    },
+    description: {
+      fontSize: '40px',
+      marginBottom: '40px',
+      color: '#666666',
+    },
+    button: {
+      padding: '14px 28px',
+      backgroundColor: '#3498DB',
+      color: '#FFFFFF',
+      borderRadius: '4px',
+      fontSize: '20px',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s ease',
+    },
+    buttonHover: {
+      backgroundColor: '#1ABC9C',
+    },
+  };
+  
   
 
   return (
-    <div style={pageStyle}>
+    <div style={styles.container}>
+      <div style={styles.content}>
+        <h1 style={styles.title}>Welcome to BookStore</h1>
+        
+       
+    <div>
       {isLoggedIn ? (
         <BrowserRouter>
         <Routes>
@@ -53,6 +91,8 @@ function App() {
       ) : (
         <EntryPage onLogin={handleLoginMain} />
       )}
+    </div>
+    </div>
     </div>
     
   );

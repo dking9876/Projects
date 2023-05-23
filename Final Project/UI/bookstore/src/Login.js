@@ -5,12 +5,7 @@ function Login({ onLogin }) {
     const [city, setCity] = useState('');
     const [data, setdata] = useState([])
   
-    const pageStyle = {
-      backgroundColor: 'lightblue',
-      padding: '20px',
-      fontSize: '18px',
-      color: 'black',
-    }
+    
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,7 +41,8 @@ function Login({ onLogin }) {
         }
   
     return (
-        <div style={pageStyle}>
+      <div>
+      
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -65,6 +61,7 @@ function Login({ onLogin }) {
           <button type="submit">Submit</button>
         </form>
       </div>
+     
     );
   }
   export default Login;
