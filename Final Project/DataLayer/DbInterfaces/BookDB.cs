@@ -73,6 +73,7 @@ namespace DataLayer.DbInterfaces
             bookResponse = await db.container.ReplaceItemAsync<Book>(bookResponse.Resource, book.id, new PartitionKey(book.City));
             return null;
         }
+        
         public async Task<Book> DeleteBook(Book book)
         {
             

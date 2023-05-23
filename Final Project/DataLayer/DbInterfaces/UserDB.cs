@@ -24,9 +24,7 @@ namespace DataLayer.DbInterfaces
         }
 
         public async Task<User> CreateUser(User user)
-
         {  
-           
             try
             {
                 // Read the item to see if it exists
@@ -38,13 +36,11 @@ namespace DataLayer.DbInterfaces
             catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
             {
 
-                // Create an item in the container representing the Wakefield family. Note we provide the value of the partition key for this item, which is "Wakefield"
+                // Create an item in the container representing the User. 
                 ItemResponse<User> UserResponse = await this.db.container.CreateItemAsync<User>(user, new PartitionKey(user.City));
-                // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse. We can also access the RequestCharge property to see the amount of RUs consumed on this request.
+                
                 Console.WriteLine("Created item in database with id: {0} Operation consumed {1} RUs.\n", UserResponse.Resource.UserName, UserResponse.RequestCharge);
             }
-            
-
             return user;
         }
         public async Task<User> GetUser(string username)
@@ -74,6 +70,7 @@ namespace DataLayer.DbInterfaces
             userResponse = await db.container.ReplaceItemAsync<User>(userResponse.Resource, user.id, new PartitionKey(user.City));
             return null;
         }
+        
         public async Task<User> DeleteUser(User user)
         {
             try

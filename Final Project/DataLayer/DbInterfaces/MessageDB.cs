@@ -25,9 +25,9 @@ namespace DataLayer.DbInterfaces
         {
             try
             {
-                // Create an item in the container representing the Wakefield family. Note we provide the value of the partition key for this item, which is "Wakefield"
+                // Create an item in the container representing the message. 
                 ItemResponse<Message> MessageResponse = await this.db.container.CreateItemAsync<Message>(message, new PartitionKey(message.City));
-                // Note that after creating the item, we can access the body of the item with the Resource property off the ItemResponse. We can also access the RequestCharge property to see the amount of RUs consumed on this request.
+        
                 Console.WriteLine("Created item in database with id: {0} Operation consumed {1} RUs.\n", MessageResponse.Resource.id, MessageResponse.RequestCharge);
             }
             catch (Exception ex)

@@ -22,7 +22,7 @@ namespace Api.Controllers
     {
        
 
-        public static readonly List<DataLayer.Models.User> Items = new List<DataLayer.Models.User>();
+        //public static readonly List<DataLayer.Models.User> Items = new List<DataLayer.Models.User>();
 
         [FunctionName("CreateUser")]
         public static async Task<IActionResult> CreateUser([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "user")] HttpRequest req, ILogger log)

@@ -20,7 +20,7 @@ namespace Api.Controllers
     public static class BookController
     {
         [FunctionName("GetAllBooks")]
-        static public async Task<IActionResult> GetAllMissions([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "book")] HttpRequest req, ILogger log)
+        static public async Task<IActionResult> GetAllBooks([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "book")] HttpRequest req, ILogger log)
         {
             BookDB bookDb = new BookDB();
             DataLayer.Models.Book[] DBbookary = await bookDb.GetAllBooks();
