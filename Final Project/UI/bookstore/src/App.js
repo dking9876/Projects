@@ -14,6 +14,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Login1 from "./Login"
 import EntryPage from "./EntryPage"
+import picture from './ProjectLogo.jpg'; // Import the JPG picture
+
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -69,8 +72,11 @@ function App() {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        <h1 style={styles.title}>Welcome {username} to BookStore</h1>
+      
+      <img src={picture} alt="Picture" style={{ width: '20%', height: 'auto' }} />
+        <h1 style={styles.title}>Welcome {username} to BookStore          </h1>
         
+       
        
     <div>
       {isLoggedIn ? (
