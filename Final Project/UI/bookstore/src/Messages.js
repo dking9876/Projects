@@ -32,6 +32,7 @@ function Messages(username, ) {
               <th>city</th>
               <th>source</th>
               <th>body</th>
+              <th>time</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +41,7 @@ function Messages(username, ) {
                 <td>{item.city}</td>
                 <td>{item.source}</td>
                 <td>{item.body}</td>
+                <td>{(new Date(item.time)).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

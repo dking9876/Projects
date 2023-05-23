@@ -31,6 +31,7 @@ function SentMessages(username) {
               <th>city</th>
               <th>destanation</th>
               <th>body</th>
+              <th>time</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +40,7 @@ function SentMessages(username) {
                 <td>{item.city}</td>
                 <td>{item.destination}</td>
                 <td>{item.body}</td>
+                <td>{(new Date(item.time)).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>

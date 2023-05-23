@@ -1,10 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
-
+import './App.css';
 const EntryLayout = () => {
   return (
     <>
       <nav>
-        <ul>
+        <ul className="custom-list">
           <li>
             <Link to="login">Login</Link>
           </li>

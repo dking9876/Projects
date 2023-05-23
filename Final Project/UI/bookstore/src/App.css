@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+.custom-list {
+  list-style-type: none; /* Remove the default bullet point */
+}
+
+.custom-list li:before {
+  content: ""; /* Remove the default marker */
+}

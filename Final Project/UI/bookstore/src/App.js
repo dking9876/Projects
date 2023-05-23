@@ -69,7 +69,7 @@ function App() {
   return (
     <div style={styles.container}>
       <div style={styles.content}>
-        <h1 style={styles.title}>Welcome to BookStore</h1>
+        <h1 style={styles.title}>Welcome {username} to BookStore</h1>
         
        
     <div>

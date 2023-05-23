@@ -11,7 +11,7 @@ function EntryPage({ onLogin }) {
       }
   return (
     <div>
-      <h2>Welcome to bookstore site, you need to login before you can enter </h2>
+      <h2>Please login or signin </h2>
       <BrowserRouter>
       <Routes>
   <Route path="/" element={<EntryLayout />}>
