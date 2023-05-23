@@ -6,34 +6,28 @@ const Layout = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Main</Link>
+            <Link to="/login"> A little bit about the site</Link>
           </li>
           <li>
-            <Link to="/signup">Signup</Link>
+            <Link to="/login/searchBook">Search book to buy </Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login/CreateUserBook">Creat book for sale</Link>
           </li>
           <li>
-            <Link to="/searchBook">SearchBook</Link>
+            <Link to="/login/DeleteUserBook">Delete book for sale</Link>
           </li>
           <li>
-            <Link to="/CreateUserBook">CreateUserBook</Link>
+            <Link to="/login/MyBooks"> Show my books</Link>
           </li>
           <li>
-            <Link to="/DeleteUserBook">DeleteUserBook</Link>
+            <Link to="/login/CreateMessage">Send message</Link>
           </li>
           <li>
-            <Link to="/MyBooks">MyBooks</Link>
+            <Link to="/login/Messages">Show my messages</Link>
           </li>
           <li>
-            <Link to="/CreateMessage">CreateMessage</Link>
-          </li>
-          <li>
-            <Link to="/Messages">Messages</Link>
-          </li>
-          <li>
-            <Link to="/SentMessages">SentMessages</Link>
+            <Link to="/login/SentMessages">Show messages I sent</Link>
           </li>
         </ul>
       </nav>

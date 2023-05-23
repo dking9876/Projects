@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Main({ username }) {
+function Main({  }) {
   return (
     <div>
-      <h2>Main Page</h2>
-      <p>Welcome to the BookStore web site.</p>
+      <h2>About us</h2>
+      <p>In this site we offer to sell and buy second hand books</p>
     </div>
   );
 }

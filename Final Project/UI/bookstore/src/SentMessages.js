@@ -9,14 +9,13 @@ function SentMessages(username) {
         fetch(` http://localhost:3000/api/message/` + username.username + `/sentmessages`, {
         method: 'GET'})
         .then(response => response.json())
-      .then(json => setdata(json))
-      .catch(error => {
-        // Handle any errors
-        console.error('Error:', error);
-      })
-      .finally(() => {
-        
-      })
+        .then(json => setdata(json))
+        .catch(error => {
+          // Handle any errors
+          console.error('Error:', error);
+        })
+        .finally(() => {
+        })
       }
 
     return (

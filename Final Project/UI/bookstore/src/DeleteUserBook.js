@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-function DeleteUserBook({ username }) {
-    const [city, setCity] = useState('');
+function DeleteUserBook({ username, city }) {
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
     const [condition, setCondition] = useState('');
@@ -8,7 +7,6 @@ function DeleteUserBook({ username }) {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      alert('Your book were deleted')
       fetch(`http://localhost:3000/api/userbook/` + username.username + ``, {method: 'DELETE', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
@@ -20,6 +18,22 @@ function DeleteUserBook({ username }) {
              
              }
         ) })
+        .then(response => {
+          if (response.ok) {
+            // Successful response
+            alert('The book Deleted successfully')
+            console.log('Status code:', response.status);
+          } else {
+            alert('An error occurred ')
+            // Handle error response
+
+            console.log('Status code:', response.status);
+          }  
+        })
+        .catch(error => {
+          // Handle any errors
+          console.error('Error:', error);
+        });
              
       
     }
@@ -28,10 +42,6 @@ function DeleteUserBook({ username }) {
       <div>
         <h2>Delete your book</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)}  />
-          </div>
           <div>
             <label htmlFor="price">Price:</label>
             <input type="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)}  />

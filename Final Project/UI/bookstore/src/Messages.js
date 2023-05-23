@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 
-function Messages(username) {
+function Messages(username, ) {
     const [data, setdata] = useState([])
+    
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();

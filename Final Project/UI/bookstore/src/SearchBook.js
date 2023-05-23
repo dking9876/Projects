@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-function SearchBook({  }) {
-    const [city, setCity] = useState('');
+function SearchBook({ city }) {
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
     const [condition, setCondition] = useState('');
@@ -20,9 +19,9 @@ function SearchBook({  }) {
         .then(response => response.json())
         .then(json => setdata(json))
         .catch(error => {
-            // Handle any errors
-            console.error('Error:', error);
-          })
+          // Handle any errors
+          console.error('Error:', error);
+        })
         .finally(() => {
         })
     }
@@ -31,10 +30,6 @@ function SearchBook({  }) {
       <div>
         <h2>Search Book</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)}  />
-          </div>
           <div>
             <label htmlFor="bookName">BookName:</label>
             <input type="bookName" id="bookName" value={bookName} onChange={(e) => setBookName(e.target.value)}  />

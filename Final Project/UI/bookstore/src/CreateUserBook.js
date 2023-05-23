@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-function CreateUserBook({ username }) {
-    const [city, setCity] = useState('');
+function CreateUserBook({ username, city }) {
+    
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
     const [condition, setCondition] = useState('');
@@ -8,7 +8,6 @@ function CreateUserBook({ username }) {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      alert('Your book for sale created successfully')
       fetch(`http://localhost:3000/api/userbook`, {method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
@@ -20,6 +19,23 @@ function CreateUserBook({ username }) {
              
              }
         ) })
+        .then(response => {
+          if (response.ok) {
+            // Successful response
+            alert('Book for sale was created successfully')
+            console.log('Status code:', response.status);
+            
+            
+          } else {
+            alert('An error occurred ')
+            // Handle error response
+            console.log('Status code:', response.status);
+          }  
+        })
+        .catch(error => {
+          // Handle any errors
+          console.error('Error:', error);
+        });
              
       
     }
@@ -28,10 +44,6 @@ function CreateUserBook({ username }) {
       <div>
         <h2>Create new book for sale</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="city">City:</label>
-            <input type="text" id="city" value={city} onChange={(e) => setCity(e.target.value)}  />
-          </div>
           <div>
             <label htmlFor="price">Price:</label>
             <input type="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)}  />

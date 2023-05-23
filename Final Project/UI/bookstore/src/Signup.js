@@ -8,7 +8,6 @@ function Signup({  }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Your account created successfully')
     fetch(`http://localhost:3000/api/user`, {method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(
         {
@@ -17,6 +16,22 @@ function Signup({  }) {
             "City":city
          }
       ) })
+      .then(response => {
+        if (response.ok) {
+          // Successful response
+          alert('your user was created successfully')
+          console.log('Status code:', response.status);
+
+        } else {
+          alert('An error occurred ')
+          // Handle error response
+          console.log('Status code:', response.status);
+        }  
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error('Error:', error);
+      });
            
   }
 
