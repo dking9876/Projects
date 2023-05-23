@@ -3,8 +3,8 @@ import React from 'react';
 function Main({ username }) {
   return (
     <div>
-      <h2>Welcome, {username}!</h2>
-      <p>This is the main page of your application.</p>
+      <h2>Main Page</h2>
+      <p>Welcome to the BookStore web site.</p>
     </div>
   );
 }

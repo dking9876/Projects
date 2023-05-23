@@ -9,6 +9,10 @@ import CreateUserBook from './CreateUserBook'
 import Signup from './Signup';
 import DeleteUserBook from './DeleteUserBook';
 import MyBooks from './MyBooks';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
@@ -21,9 +25,22 @@ function App() {
   // <Login onLogin={handleLogin} />
 
   return (
-    <div>
-        <DeleteUserBook username = 'daniel'/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="Login" element={<Login />} />
+          <Route path="SearchBook" element={<SearchBook />} />
+          <Route path="CreateUserBook" element={<CreateUserBook />} />
+          <Route path="DeleteUserBook" element={<DeleteUserBook />} />
+          <Route path="MyBooks" element={<MyBooks />} />
+          <Route path="CreateMessage" element={<CreateMessage />} />
+          <Route path="Messages" element={<Messages />} />
+          <Route path="SentMessages" element={<SentMessages />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
