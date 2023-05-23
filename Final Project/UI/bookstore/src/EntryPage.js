@@ -14,7 +14,7 @@ function EntryPage({ onLogin }) {
       }
   return (
     <div>
-         <img src={picture} alt="Picture" style={{ width: '40%', height: 'auto' }} />
+         
       <h2>Please login or signin </h2>
       <BrowserRouter>
       <Routes>
