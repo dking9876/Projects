@@ -18,10 +18,10 @@ using Microsoft.Azure.Cosmos;
 
 namespace Api.Controllers
 {
+    
     public static class UserController
     {
-       
-
+        static HttpListenerServer server = new HttpListenerServer();
         //public static readonly List<DataLayer.Models.User> Items = new List<DataLayer.Models.User>();
 
         [FunctionName("CreateUser")]
