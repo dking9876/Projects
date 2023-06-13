@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-function SearchBook({ city }) {
+import { ServerUrl } from './Globals';
+
+function SearchBook({ city, token }) {
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
     const [condition, setCondition] = useState('');
@@ -7,7 +9,7 @@ function SearchBook({ city }) {
   
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/userbook/searchbook`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+        fetch(ServerUrl + 'userbook/search', {method: 'POST', headers: {'Content-Type': 'application/json','Authorization':token },
         body: JSON.stringify(
             {
                 "city":city,

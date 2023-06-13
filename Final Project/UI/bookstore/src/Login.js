@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { ServerUrl } from './Globals';
+
 function Login({ onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [city, setCity] = useState('');
-    const [data, setdata] = useState([])
-  
+    const [data, setdata] = useState([]);
     
     
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/user/Mark/login`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+        fetch(ServerUrl + 'user/login' , {method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(
             {
                 "UserName":username,
@@ -18,13 +20,14 @@ function Login({ onLogin }) {
                 
             }
         ) })
-        .then(response => {
+        .then(async response => {
             if (response.ok) {
               // Successful response
-
-              console.log('Status code:', response.status);
+              const token = await response.text();
+              
               setdata(true) ;
-              onLogin(username, city, data )
+              
+              onLogin(username, city, data, token )
             } else {
               // Handle error response
               alert('login failed ')

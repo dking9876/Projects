@@ -1,108 +1,62 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using DataLayer.Models;
-using Api.Models;
-using DataLayer;
-using DataLayer.DbInterfaces;
-using System;
-using Microsoft.Azure.Cosmos;
+using ApiLogic.Logic;
 
 namespace Api.Controllers
 {
     public static class MessageController
     {
         [FunctionName("CreateMessage")]
-        public static async Task<IActionResult> CreateMessage([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "message")] HttpRequest req, ILogger log)
+        public static async Task<IActionResult> CreateMessage([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "message/create")] HttpRequest req, ILogger log)
         {
-            log.LogInformation("Creating a new message");
+            TokenLogic HandleToken = new TokenLogic(req.Headers["Authorization"]);
+            if (!HandleToken.IsValid)
+            {
+                return new StatusCodeResult(401);
+            }
+
+            log.LogInformation("CreateMessage");
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
-            var APIMessage = JsonConvert.DeserializeObject<Models.Message>(requestBody);
-
-            var DBMessage = APIMessage.GetMessageDB();
-
-            MessageDB message = new MessageDB();
-            try
-            {
-                var CreatedDBmessage = await message.CreateMessage(DBMessage);
-                var MessageAPIMOdel = new Models.Message(CreatedDBmessage);
-                return new OkObjectResult(MessageAPIMOdel);
-            }
-            catch (Exception ex)
-            {
-                return new StatusCodeResult(500);
-            }
+            var response = await MessageLogic.CreateMessage(HandleToken.UserName, requestBody);
+            return (response == null) ? new StatusCodeResult(500) : new OkObjectResult(response);
         }
         
         [FunctionName("SentMessages")]
-        public static async Task<IActionResult> GetSentMessages([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "message/{username}/sentmessages")] HttpRequest req, ILogger log, string userName)
+        public static async Task<IActionResult> GetSentMessages([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "message/sent")] HttpRequest req, ILogger log)
         {
-           
-            MessageDB message = new MessageDB();
-            try
+            TokenLogic HandleToken = new TokenLogic(req.Headers["Authorization"]);
+            if (!HandleToken.IsValid)
             {
-                var SentMessagesArrayDb = await message.GetAllMessageSentByUser(userName);
-                var MessagesArrayAPI = new Models.Message[SentMessagesArrayDb.Length];
-
-                if (SentMessagesArrayDb.Length == 0)
-                {
-                    return new StatusCodeResult(404);
-                    //return null;
-                }
-                for (int i = 0; i < SentMessagesArrayDb.Length; i++)
-                {
-                    MessagesArrayAPI[i] = new Api.Models.Message(SentMessagesArrayDb[i]);
-                }
-
-                return new OkObjectResult(MessagesArrayAPI);
-
-            }
-            catch (Exception ex)
-            {
-                return new StatusCodeResult(404);
-
+                return new StatusCodeResult(401);
             }
 
+            log.LogInformation("GetSentMessages");
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+            var response = await MessageLogic.GetSentMessages(HandleToken.UserName);
+            return (response == null) ? new StatusCodeResult(404) : new OkObjectResult(response);
         }
         
         [FunctionName("MyMessages")]
-        public static async Task<IActionResult> GetMyMessages([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "message/{username}/getmessages")] HttpRequest req, ILogger log, string userName)
+        public static async Task<IActionResult> GetMyMessages([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "message/get")] HttpRequest req, ILogger log)
         {
-            MessageDB message = new MessageDB();
-            try
+            TokenLogic HandleToken = new TokenLogic(req.Headers["Authorization"]);
+            if (!HandleToken.IsValid)
             {
-                var SentMessagesArrayDb = await message.GetAllMessageToUser(userName);
-                var MessagesArrayAPI = new Models.Message[SentMessagesArrayDb.Length];
-
-                if (SentMessagesArrayDb.Length == 0)
-                {
-                    return new StatusCodeResult(404);
-                    //return null;
-                }
-                for (int i = 0; i < SentMessagesArrayDb.Length; i++)
-                {
-                    MessagesArrayAPI[i] = new Api.Models.Message(SentMessagesArrayDb[i]);
-                }
-
-                return new OkObjectResult(MessagesArrayAPI);
-
+                return new StatusCodeResult(401);
             }
-            catch (Exception ex)
-            {
-                return new StatusCodeResult(404);
 
-            }
+            log.LogInformation("GetMyMessages");
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+
+            var response = await MessageLogic.GetMyMessages(HandleToken.UserName);
+            return (response == null) ? new StatusCodeResult(404) : new OkObjectResult(response);
         }
-        
-
-
     }
 }

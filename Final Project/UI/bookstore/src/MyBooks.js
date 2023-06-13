@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { ServerUrl } from './Globals';
 
-
-function MyBooks(username) {
+function MyBooks( token) {
     const [data, setdata] = useState([])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/userbook/` + username.username + ``, {method: 'GET'})
+        fetch(ServerUrl + 'userbook/get', {method: 'GET' ,headers: { 'Authorization': token.token}})
         .then(response => response.json())
         .then(json => setdata(json))
         .catch(error => {

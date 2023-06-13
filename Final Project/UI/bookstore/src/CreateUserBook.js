@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-function CreateUserBook({ username, city }) {
+import { ServerUrl } from './Globals';
+
+function CreateUserBook({ username, city, token }) {
     
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
@@ -8,7 +10,7 @@ function CreateUserBook({ username, city }) {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`http://localhost:3000/api/userbook`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+      fetch(ServerUrl + 'userbook/create', {method: 'POST', headers: {'Content-Type': 'application/json','Authorization':token},
         body: JSON.stringify(
             {
                 "city":city,

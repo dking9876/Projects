@@ -21,11 +21,14 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [city, setCity] = useState('');
+  const [token, setToken] = useState('');
 
-  const handleLoginMain = (username, city, data) => {
+  const handleLoginMain = (username, city, data, token) => {
     setIsLoggedIn(data);
     setCity(city);
     setUsername(username);
+    setToken(token);
+    console.log('token:',token);
   }
 
   const styles = {
@@ -84,13 +87,13 @@ function App() {
         <Routes>
         <Route path="/login" element={<Layout />}>
           <Route index element={<Main/>} />
-          <Route path="searchBook" element={<SearchBook city = {city}/>} />
-          <Route path="CreateUserBook" element={<CreateUserBook username = {username} city = {city}  />} />
-          <Route path="DeleteUserBook" element={<DeleteUserBook username = {username} city = {city} />} />
-          <Route path="MyBooks" element={<MyBooks username = {username} />} />
-          <Route path="CreateMessage" element={<CreateMessage username = {username} city = {city} />} />
-          <Route path="Messages" element={<Messages username = {username} />} />
-          <Route path="SentMessages" element={<SentMessages username = {username} />} />
+          <Route path="searchBook" element={<SearchBook city = {city} token = {token}/>} />
+          <Route path="CreateUserBook" element={<CreateUserBook username = {username} city = {city} token = {token}  />} />
+          <Route path="DeleteUserBook" element={<DeleteUserBook username = {username} city = {city} token = {token} />} />
+          <Route path="MyBooks" element={<MyBooks  token = {token} />} />
+          <Route path="CreateMessage" element={<CreateMessage username = {username} city = {city} token = {token}/>} />
+          <Route path="Messages" element={<Messages token = {token} />} />
+          <Route path="SentMessages" element={<SentMessages  token = {token} />} />
         </Route>
       </Routes>
       </BrowserRouter>

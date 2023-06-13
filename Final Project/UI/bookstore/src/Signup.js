@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ServerUrl } from './Globals';
 
 function Signup({  }) {
     const [username, setUsername] = useState('');
@@ -8,7 +9,7 @@ function Signup({  }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/api/user`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+    fetch(ServerUrl + 'user/create', {method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(
         {
             "UserName":username,

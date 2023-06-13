@@ -9,8 +9,8 @@ import picture from './ProjectLogo.jpg'; // Import the JPG picture
 
 
 function EntryPage({ onLogin }) {
-    const handleLoginEntry = (username, city, data) => {
-        onLogin(username, city, data )
+    const handleLoginEntry = (username, city, data, token) => {
+        onLogin(username, city, data, token )
       }
   return (
     <div>

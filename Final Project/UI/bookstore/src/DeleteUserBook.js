@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-function DeleteUserBook({ username, city }) {
+import { ServerUrl } from './Globals';
+
+function DeleteUserBook({ username, city, token }) {
     const [bookName, setBookName] = useState('');
     const [price, setPrice] = useState('');
     const [condition, setCondition] = useState('');
@@ -7,7 +9,7 @@ function DeleteUserBook({ username, city }) {
     
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`http://localhost:3000/api/userbook/` + username.username + ``, {method: 'DELETE', headers: {'Content-Type': 'application/json'},
+      fetch(ServerUrl + 'userbook/delete', {method: 'DELETE', headers: {'Content-Type': 'application/json','Authorization':token},
         body: JSON.stringify(
             {
                 "city":city,

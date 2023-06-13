@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { ServerUrl } from './Globals';
 
-
-function Messages(username, ) {
+function Messages( token) {
     const [data, setdata] = useState([])
     
     
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/api/message/` + username.username + `/getmessages`, {method: 'GET'})
+        fetch(ServerUrl + 'message/get' , {method: 'GET', headers: {'Authorization':token.token}})
         .then(response => response.json())
         .then(json => setdata(json))
         .catch(error => {

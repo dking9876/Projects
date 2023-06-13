@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-function CreateMessage({ username, city }) {
+import { ServerUrl } from './Globals';
+
+function CreateMessage({ username, city, token }) {
     
     const [destination, setDestination] = useState('');
     const [body, setBody] = useState('');
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      fetch(`http://localhost:3000/api/message`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+      fetch(ServerUrl + 'message/create', {method: 'POST', headers: {'Content-Type': 'application/json','Authorization':token},
         body: JSON.stringify(
             {
                 "city":city,

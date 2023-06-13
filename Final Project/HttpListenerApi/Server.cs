@@ -19,7 +19,7 @@ namespace HttpListenerApi
 
             listener.Start();
 
-            Console.WriteLine("http://127.0.0.1:7071");
+            Console.WriteLine("http://127.0.0.1:7071/");
 
             while (true)
             {
