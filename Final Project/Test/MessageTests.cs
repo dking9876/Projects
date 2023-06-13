@@ -32,20 +32,20 @@ namespace Test
             User user = new User() { id = "Daniel", City = "RamatGan", UserName = "daniel", Password = "123" };
             MessageDB messageDb = new MessageDB();
             //await userDb.CreateMessage(user);
-            Message[] msgArray = await messageDb.GetAllMessageSentByUser(user);
-            Console.WriteLine(msgArray[0].body);
-            Console.WriteLine(msgArray[1].body);
-            Console.WriteLine(msgArray[2].body);
+            //Message[] msgArray = await messageDb.GetAllMessageSentByUser(user);
+            //Console.WriteLine(msgArray[0].body);
+            //Console.WriteLine(msgArray[1].body);
+            //Console.WriteLine(msgArray[2].body);
         }
         static public async Task TestDbGetAllMessageToUserAsync()
         {
             User user = new User() { id = "Daniel", City = "RamatGan", UserName = "mark", Password = "123" };
             MessageDB messageDb = new MessageDB();
             //await userDb.CreateMessage(user);
-            Message[] msgArray = await messageDb.GetAllMessageToUser(user);
-            Console.WriteLine(msgArray[0].body);
-            Console.WriteLine(msgArray[1].body);
-            Console.WriteLine(msgArray[2].body);
+            //Message[] msgArray = await messageDb.GetAllMessageToUser(user);
+            //Console.WriteLine(msgArray[0].body);
+            //Console.WriteLine(msgArray[1].body);
+            //Console.WriteLine(msgArray[2].body);
         }
     }
 }

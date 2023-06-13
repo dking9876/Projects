@@ -149,7 +149,7 @@ namespace HttpListenerApi
             {
                 resp.StatusCode = (int)HttpStatusCode.OK;
                 resp.StatusDescription = "Status OK";
-                string str =  Token.CreateToken(response.Item2);
+                string str =  TokenLogic.CreateToken(response.Item2);
                 
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(str);
 

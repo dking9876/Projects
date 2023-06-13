@@ -15,14 +15,7 @@ namespace ApiLogic.Models
         public Token()
         {
         }
-        public static string CreateToken(string userName)
-        {
-            Token token = new Token();
-            token.UserName = userName; ;
-            token.ExperationTime = DateTime.Now.AddHours(48);
-            string str = JsonConvert.SerializeObject(token);
-            return str;
-        }
+
         public bool IsValidToken()
         {
             return this.ExperationTime > DateTime.Now;  

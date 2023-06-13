@@ -39,7 +39,7 @@ namespace Api.Controllers
             (bool, string) response =  await UserLogic.Login(requestBody);
             if(response.Item1)
             {
-                string str = Token.CreateToken(response.Item2);
+                string str = TokenLogic.CreateToken(response.Item2);
                 return new OkObjectResult(str);
             }
             else
