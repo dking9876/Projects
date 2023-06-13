@@ -15,11 +15,11 @@ namespace HttpListenerApi
         public static  void HandleClientRequests()
         {
             using var listener = new HttpListener();
-            listener.Prefixes.Add("http://localhost:7071/");
+            listener.Prefixes.Add("http://127.0.0.1:7071/");
 
             listener.Start();
 
-            Console.WriteLine("http://localhost:7071/");
+            Console.WriteLine("http://127.0.0.1:7071");
 
             while (true)
             {
